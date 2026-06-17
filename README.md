@@ -46,9 +46,7 @@ HYPRLAND-FEDORA/
 │   ├── neofetch/
 │   │   └── config.conf       # Customización clásica del fetch del sistema
 │   ├── noctalia/
-│   │   └── noctalia.conf     # Módulos, barras y paneles del shell principal
 │   ├── nvim/
-│   │   └── gruvbox.lua       # Configuración principal para el tema de nvim "Gruvbox"
 │   └── rofi/
 │       └── config.rasi       # Tema estético y comportamiento del lanzador
 ├── assets/
@@ -57,7 +55,7 @@ HYPRLAND-FEDORA/
 │   └── Desktop3.png         
 ├── zsh/
 │   └── .zshrc                # Aliases, funciones y personalización de la Shell
-├── README.md                 # 
+├── README.md                 
 └── Yuki.jpeg                 # Imagen de usuario personal
 ```
 
@@ -103,9 +101,6 @@ HYPRLAND-FEDORA/
 > Puedes alternar de forma instantánea la distribución de tu teclado entre español (`es`) e inglés (`us`) presionando la combinación `SUPER + ESPACIO`.
 
 ## Instalación Rápida
-
-## 🚀 Instalación Rápida
-
 
 ### 1. Clonar este repositorio
 ```bash
