@@ -48,11 +48,17 @@ HYPRLAND-FEDORA/
 │   ├── noctalia/
 │   ├── nvim/
 │   └── rofi/
-│       └── config.rasi       # Tema estético y comportamiento del lanzador
+│       ├── config.rasi       # Configuracion del lanzador
+│       ├── launcher.rasi     # Archivo de seleccion de tema
+│       └── style-3.rasi      # Apariencia del lanzador
 ├── assets/
 │   ├── Desktop1.png         
 │   ├── Desktop2.png          
 │   └── Desktop3.png         
+├── Wallpapers/
+│   ├── Blue.png
+│   ├── Gray.jpg
+│   └── Green.jpg
 ├── zsh/
 │   └── .zshrc                # Aliases, funciones y personalización de la Shell
 ├── README.md                 
