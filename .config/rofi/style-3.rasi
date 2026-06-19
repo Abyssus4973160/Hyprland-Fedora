@@ -2,7 +2,7 @@
 configuration {
 	modi:                       "drun";
     show-icons:                 true;
-    display-drun:               " ";
+    display-drun:               "";
 	drun-display-format:        "{name}";
 }
 
@@ -71,7 +71,7 @@ entry {
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Search";
+    placeholder:                 "Buscar";
     placeholder-color:           inherit;
 }
 

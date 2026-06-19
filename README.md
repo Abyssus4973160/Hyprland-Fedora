@@ -4,7 +4,7 @@ Repositorio de configuraciones personales para el compositor de ventanas Hyprlan
 
 Este entorno ha sido diseñado con el propósito de consolidar un espacio de trabajo de alto rendimiento, fluido y visualmente cohesivo dentro del ecosistema nativo de Wayland. El núcleo de esta personalización integra una configuración modular de Noctalia Shell como interfaz y panel principal del sistema, el emulador de terminal Kitty optimizado para una respuesta inmediata mediante aceleración por GPU, y el lanzador dinámico Rofi adaptado estéticamente para una navegación ágil y sin fricciones.
 
-El resultado es un sistema minimalista, eficiente en el consumo de recursos y adaptado al hardware diario. ¡Siéntete libre de explorar el código, clonar el repositorio y adaptar estas configuraciones a tu propio flujo de trabajo!
+El resultado es un sistema minimalista, eficiente en el consumo de recursos y adaptado al hardware diario.
 
 ``` 
                                                                      ,'''''.
@@ -46,15 +46,15 @@ HYPRLAND-FEDORA/
 │   ├── neofetch/
 │   │   └── config.conf       # Customización clásica del fetch del sistema
 │   ├── noctalia/
-│   ├── nvim/
+│   ├── nvim(Gruvbox)/
+│   │   └── gruvbox.lua       # Plugin para el tema Gruvbox de nvim
+│   ├── cava/
+│   │   └── config            # Configuracion de colores
 │   └── rofi/
 │       ├── config.rasi       # Configuracion del lanzador
 │       ├── launcher.rasi     # Archivo de seleccion de tema
 │       └── style-3.rasi      # Apariencia del lanzador
-├── assets/
-│   ├── Desktop1.png         
-│   ├── Desktop2.png          
-│   └── Desktop3.png         
+├── assets/       
 ├── Wallpapers/
 │   ├── Blue.png
 │   ├── Gray.jpg
@@ -65,10 +65,29 @@ HYPRLAND-FEDORA/
 └── Yuki.jpeg                 # Imagen de usuario personal
 ```
 
-## Capturas
-![App Screenshot](./assets/Desktop1.png)
-![App Screenshot](./assets/Desktop2.png)
-![App Screenshot](./assets/Desktop3.png)
+<h2 align="center">Entorno</h2>
+<p align="center">
+  <img src="./assets/Desktop1.png" alt="Desktop Clean" width="60%"><br><br>
+  <img src="./assets/Desktop2.png" alt="Desktop Active Windows" width="60%"><br><br>
+  <img src="./assets/Desktop3.png" alt="Noctalia and Rofi Menu" width="60%">
+</p>
+
+<h2 align="center">Rofi</h2>
+<p align="center">
+  <img src="./assets/Rofi.png" alt="Desktop Clean" width="60%">
+</p>
+
+<h2 align="center">Kitty (Fastfetch/Neofetch)</h2>
+<p align="center">
+  <img src="./assets/Kitty.png" alt="Desktop Clean" width="60%">
+</p>
+
+<h2 align="center">AstroNvim (Gruvbox)</h2>
+<p align="center">
+  <img src="./assets/AstroNvim.png" alt="Desktop Clean" width="60%">
+</p>
+
+
 
 ## Atajos de Teclado (`$mainMod` = Tecla SUPER / Windows)
 
@@ -104,7 +123,7 @@ HYPRLAND-FEDORA/
 | **Control de brillo de pantalla** | Teclas multimedia de brillo vinculadas a `brightnessctl` |
 | **Control de reproducción** | Teclas multimedia (`Next`, `Pause`, `Play`, `Prev`) vinculadas a `playerctl` |
 
-> Puedes alternar de forma instantánea la distribución de tu teclado entre español (`es`) e inglés (`us`) presionando la combinación `SUPER + ESPACIO`.
+> Se puede alternar de forma instantánea la distribución de tu teclado entre español (`es`) e inglés (`us`) presionando la combinación `SUPER + ESPACIO`.
 
 ## Instalación Rápida
 
@@ -114,24 +133,61 @@ git clone [https://github.com/Abyssus4973160/Hyprland-Fedora.git](https://github
 cd Hyprland-Fedora
 ```
 
-### 2. Instalacion de Noctalia Shell
+### 2. Habilitar e Instalar Hyprland (Versión Actualizada)
+Para obtener la última versión del compositor optimizada para Fedora, habilitamos el repositorio COPR de solopasha antes de instalar:
+```bash
+sudo dnf copr enable solopasha/hyprland
+sudo dnf install hyprland
+```
+
+### 3. Instalacion de Noctalia Shell
 Para instalar el núcleo visual de este setup, utilizaremos el repositorio COPR oficial de Noctalia para Fedora:
 ```bash
 sudo dnf copr enable noctalia/shell
 sudo dnf install noctalia-shell
 ```
 
-### 3. Instalar dependencias adicionales del sistema
+### 4. Instalar dependencias adicionales del sistema
 Instala el resto de las herramientas necesarias para que el compositor, la terminal y los scripts multimedia funcionen correctamente:
 ```bash
 sudo dnf install hyprland kitty rofi-wayland brightnessctl playerctl wireplumber nautilus zsh neovim fastfetch
 ```
 
-### 4. Desplegar los Archivos de Configuración (Dotfiles)
+### 5. Instalar AstroNvim y sus dependencias de sistema
+Ejecuta el siguiente bloque de comandos para configurar las herramientas y la base de AstroNvim:
+```bash
+# Instalar utilidades requeridas por AstroNvim
+sudo dnf install wl-clipboard ripgrep -y
+
+# Habilitar repositorio e instalar lazygit
+sudo dnf copr enable atim/lazygit -y
+sudo dnf check-update
+sudo dnf install lazygit -y
+
+# Instalar gdu (analizador de disco rápido)
+curl -L [https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz](https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz) | tar xz
+chmod +x gdu_linux_amd64
+sudo mv gdu_linux_amd64 /usr/bin/gdu
+
+# Instalar parsers y herramientas mediante cargo binstall (requiere tener Rust instalado)
+cargo binstall tree-sitter-cli bottom
+
+# Descargar la plantilla de configuración base de AstroNvim
+git clone --depth 1 [https://github.com/AstroNvim/template](https://github.com/AstroNvim/template) ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+
+# Iniciar Neovim para que se autoinstalen los plugins y temas
+nvim
+```
+
+### 6. Desplegar los Archivos de Configuración (Dotfiles)
 Mueve las carpetas de personalización a sus rutas correspondientes en tu directorio nativo:
 ```bash
 # Copiar todas las configuraciones de aplicaciones a ~/.config
 cp -r .config/* ~/.config/
+
+# Mover el tema Gruvbox a la ruta de plugins de AstroNvim
+cp "~/.config/nvim(Gruvbox)/gruvbox.lua" ~/.config/nvim/lua/plugins/
 
 # Configurar la shell Zsh
 cp zsh/.zshrc ~/
@@ -139,3 +195,4 @@ cp zsh/.zshrc ~/
 # Mover recursos adicionales
 cp Yuki.jpeg ~/Pictures/
 ```
+
